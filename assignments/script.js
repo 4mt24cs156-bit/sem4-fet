@@ -10,9 +10,24 @@ let index = 0;
 /* function changeRole() {
     index = (index + 1) % roles.length;
     document.getElementById("role").textContent = roles[index];
-} */
+} */function changeRole() {
+    const roleElement = document.getElementById("role");
 
-function changeRole() {
+    // Get current role from the page
+    const currentRole = roleElement.textContent;
+
+    // Use current role as default in prompt
+    let newRole = prompt("What is your new professional role?", currentRole);
+
+    if (newRole && newRole.trim() !== "") {
+        roleElement.textContent = newRole.trim();
+        alert("Role updated successfully to: " + newRole);
+    } else {
+        alert("No changes were made.");
+    }
+}
+
+/*function changeRole() {
     // 1. Ask the user for their new role using a prompt
     let newRole = prompt("What is your new professional role?", "Full Stack Developer");
 
@@ -27,7 +42,7 @@ function changeRole() {
     } else {
         alert("No changes were made.");
     }
-}
+}*/
 // script.js
 
 // 1. Select the search input and all the project cards
