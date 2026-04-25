@@ -51,12 +51,27 @@ button {
     </section>
 
     <script >// script.js
-document.getElementById('changeText').addEventListener('click', function() {
-    const greeting = document.getElementById('greeting');
-    greeting.textContent = "Glad to have you here!";
-    greeting.style.color = "#ffeb3b";
-    alert("Thanks for visiting my page!");
+// Function to handle the greeting
+document.getElementById('colorBtn').addEventListener('click', function() {
+    // 1. Ask the user for their name
+    let userName = prompt("Please enter your name:", "Guest");
+
+    // 2. Check if the user entered something
+    if (userName != null && userName !== "") {
+        // 3. Show a personalized alert
+        alert("Hello, " + userName + "! Welcome to my page.");
+        
+        // Bonus: Update the page text with their name
+        document.getElementById('name').innerText = userName;
+    } else {
+        alert("You didn't enter a name, but welcome anyway!");
+    }
+
+    // Change the theme color as before
+    const randomColor = Math.floor(Math.random()*16777215).toString(16);
+    document.body.style.backgroundColor = "#" + randomColor;
 });
+
 </script>
 </body>
 </html>
