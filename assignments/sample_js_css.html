@@ -5,7 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal Introduction</title>
-    <link rel="stylesheet" href="style.css">
+<style>/* style.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+    text-align: center;
+}
+
+.hero {
+    background-color: #007bff;
+    color: white;
+    padding: 100px 20px;
+}
+
+.about {
+    padding: 50px 20px;
+    max-width: 600px;
+    margin: auto;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+</style>
 </head>
 <body>
     <header class="hero">
@@ -19,6 +50,13 @@
         <p>I am an aspiring developer learning how to build simple and effective web pages using HTML, CSS, and JavaScript.</p>
     </section>
 
-    <script src="script.js"></script>
+    <script >// script.js
+document.getElementById('changeText').addEventListener('click', function() {
+    const greeting = document.getElementById('greeting');
+    greeting.textContent = "Glad to have you here!";
+    greeting.style.color = "#ffeb3b";
+    alert("Thanks for visiting my page!");
+});
+</script>
 </body>
 </html>
