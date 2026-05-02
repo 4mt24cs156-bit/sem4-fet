@@ -2,23 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Brand Dashboard | Assignment 2B</title>
-    <link rel="stylesheet" href="2.css">
+    <title>Simple Skill Matrix</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <header>
-        <h1>Global Brand Dashboard</h1>
-        <div class="controls">
-            <input type="text" id="searchBar" placeholder="Search brands or regions...">
-        </div>
-    </header>
-
-    <main id="brandGrid" class="dashboard-grid">
-        <!-- Cards injected by script.js -->
-    </main>
-
-    <script src="2.js"></script>
+    <div class="container">
+        <h1>Team Skill Matrix</h1>
+        <table>
+            <thead>
+                <tr id="headerRow">
+                    <th>Team Member</th>
+                    <!-- Skills will be injected here -->
+                </tr>
+            </thead>
+            <tbody id="matrixBody">
+                <!-- Data will be injected here -->
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
