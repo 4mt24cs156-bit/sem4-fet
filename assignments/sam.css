@@ -1,0 +1,4 @@
+body { font-family: sans-serif; background: #f4f4f9; display: flex; justify-content: center; height: 100vh; }
+.container { text-align: center; background: white; padding: 2rem; border-radius: 10px; }
+button { padding: 10px 20px; background: #4CAF50; color: white; border: none; cursor: pointer; }
+button:hover { background: #45a049; }
