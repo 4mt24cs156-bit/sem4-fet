@@ -1,18 +1,36 @@
- body { 
-    background: rgb(25,50,50); /* blue background */ 
-    color: white; 
-    font-family: Arial, sans-serif; 
-    text-align: center; /* Centers h2 and other text */
-  } 
-button { padding: 10px 20px; background: #4CAF50; color: white; border: none; cursor: pointer; }
-button:hover { background: #45a049; }
-  h2 { 
-    text-align: center; 
-  } 
+body {
+    background: rgb(25,50,50);
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
 
-  /* Center the list block while keeping text left-aligned inside it */
-  ol { 
-    display: table; /* Acts like a block that fits its content */
-    margin: 0 auto; /* Centers the table */
-    text-align: left; /* Keeps the list items left-aligned */
-  }
+h2 {
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+button {
+    padding: 8px 15px;
+    margin: 10px 5px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #45a049;
+}
+
+/* Center list but keep text left */
+ol {
+    display: table;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* Add spacing for items */
+li {
+    margin: 5px 0;
+}
