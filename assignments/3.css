@@ -1,0 +1,55 @@
+body {
+  font-family: Arial;
+  background: #1e3c3c;
+  color: white;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.form-container {
+  background: #2e5f5f;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+}
+
+input, select {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: none;
+}
+
+fieldset {
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+legend {
+  font-weight: bold;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 12px;
+}
+
+.output {
+  margin-top: 20px;
+  background: #fff;
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+}
