@@ -1,0 +1,61 @@
+
+
+:root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --accent: #38bdf8;
+    --txt: #f8fafc;
+}
+
+body {
+    font-family: sans-serif;
+    background: var(--bg);
+    color: var(--txt);
+    padding: 2rem;
+    margin: 0;
+}
+
+header { text-align: center; margin-bottom: 2rem; }
+
+#searchBar {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background: var(--card);
+    color: #fff;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.card {
+    background: var(--card);
+    padding: 20px;
+    border-radius: 12px;
+    transition: 0.3s;
+    border: 1px solid transparent;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.card-header { display: flex; justify-content: space-between; align-items: center; }
+
+.brand-name { color: var(--accent); font-weight: bold; }
+
+.region-tag { font-size: 0.7rem; background: #334155; padding: 2px 8px; border-radius: 10px; }
+
+.value { font-size: 1.4rem; margin: 10px 0; }
+
+.progress-bar { height: 6px; background: #334155; border-radius: 3px; }
+
+.progress-fill { height: 100%; background: #4ade80; border-radius: 3px; }
