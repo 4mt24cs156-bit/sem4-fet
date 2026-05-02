@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Application Form</title>
+  <link rel="stylesheet" href="3.css">
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Application Form</h2>
+
+  <form id="myForm">
+
+    <fieldset>
+      <legend>Personal Details</legend>
+
+      <!-- Name -->
+      <input type="text" id="name" placeholder="Enter your name">
+      <div id="nameError" class="error"></div>
+
+      <!-- Phone -->
+      <input type="text" id="phone" placeholder="Enter phone number">
+      <div id="phoneError" class="error"></div>
+
+      <!-- Email -->
+      <input type="email" id="email" placeholder="Enter email">
+      <div id="emailError" class="error"></div>
+
+      <!-- Gender -->
+      <p><strong>Gender:</strong></p>
+      <input type="radio" name="gender" value="Male"> Male
+      <input type="radio" name="gender" value="Female"> Female
+      <input type="radio" name="gender" value="Other"> Other
+      <div id="genderError" class="error"></div>
+
+    </fieldset>
+
+    <fieldset>
+      <legend>Other Details</legend>
+
+      <!-- Checkbox -->
+      <p><strong>Hobbies:</strong></p>
+      <input type="checkbox" name="hobby" value="Reading"> Reading
+      <input type="checkbox" name="hobby" value="Sports"> Sports
+      <input type="checkbox" name="hobby" value="Music"> Music
+
+      <!-- Dropdown -->
+      <p><strong>Course (Pull-down):</strong></p>
+      <select id="course">
+        <option value="">Select Course</option>
+        <option value="BCA">BCA</option>
+        <option value="BSc">BSc</option>
+        <option value="BCom">BCom</option>
+      </select>
+      <div id="courseError" class="error"></div>
+
+      <!-- List Box -->
+      <p><strong>Skills (List Box):</strong></p>
+      <select id="skills" multiple>
+        <option value="HTML">HTML</option>
+        <option value="CSS">CSS</option>
+        <option value="JavaScript">JavaScript</option>
+        <option value="Python">Python</option>
+      </select>
+
+    </fieldset>
+
+    <button type="submit">Submit</button>
+
+  </form>
+
+  <!-- Output -->
+  <div id="output" class="output"></div>
+
+</div>
+
+<script src="3.js"></script>
+</body>
+</html>
