@@ -1,42 +1,46 @@
-const technicalData = [
-    {
-        category: "Frontend Development",
-        skills: ["HTML5 & CSS3", "Modern JavaScript (ES6+)", "React.js Framework"]
-    },
-    {
-        category: "Backend Systems",
-        skills: ["Node.js Runtime", "RESTful API Design", "PostgreSQL Databases"]
-    },
-    {
-        category: "DevOps & Tools",
-        skills: ["Git Version Control", "Docker Containers", "AWS Cloud Services"]
-    }
+const data = [
+    { category: "Frontend", skills: ["HTML", "CSS"] },
+    { category: "Backend", skills: ["Node.js", "API"] }
 ];
 
-const container = document.getElementById('skillsContainer');
+const container = document.getElementById("skillsContainer");
 
-// Create the parent Ordered List
-const ol = document.createElement('ol');
-ol.className = "main-categories";
+function render() {
+    container.innerHTML = "";
+    const ol = document.createElement("ol");
 
-technicalData.forEach(item => {
-    // Create Category (LI for OL)
-    const categoryLi = document.createElement('li');
-    categoryLi.textContent = item.category;
+    data.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item.category;
 
-    // Create Skills List (Nested UL)
-    const skillsUl = document.createElement('ul');
-    skillsUl.className = "skill-items";
+        const ul = document.createElement("ul");
 
-    item.skills.forEach(skill => {
-        const skillLi = document.createElement('li');
-        skillLi.textContent = skill;
-        skillsUl.appendChild(skillLi);
+        item.skills.forEach(skill => {
+            const s = document.createElement("li");
+            s.textContent = skill;
+            ul.appendChild(s);
+        });
+
+        li.appendChild(ul);
+        ol.appendChild(li);
     });
 
-    // Nest the UL inside the Category LI
-    categoryLi.appendChild(skillsUl);
-    ol.appendChild(categoryLi);
-});
+    container.appendChild(ol);
+}
 
-container.appendChild(ol);
+function addCategory() {
+    const name = prompt("Category:");
+    if (name) data.push({ category: name, skills: [] });
+    render();
+}
+
+function addSkill() {
+    const index = prompt("Category number (1,2,..):");
+    const skill = prompt("Skill name:");
+    if (data[index - 1] && skill) {
+        data[index - 1].skills.push(skill);
+    }
+    render();
+}
+
+render();
