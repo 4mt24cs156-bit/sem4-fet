@@ -1,24 +1,42 @@
-const skills = ["HTML", "CSS", "JS", "UI Design"];
-
-const team = [
-    { name: "Alex Johnson", scores: [5, 4, 3, 2] },
-    { name: "Maria Garcia", scores: [3, 5, 5, 4] },
-    { name: "Sam Lee", scores: [2, 3, 2, 5] }
+const technicalData = [
+    {
+        category: "Frontend Development",
+        skills: ["HTML5 & CSS3", "Modern JavaScript (ES6+)", "React.js Framework"]
+    },
+    {
+        category: "Backend Systems",
+        skills: ["Node.js Runtime", "RESTful API Design", "PostgreSQL Databases"]
+    },
+    {
+        category: "DevOps & Tools",
+        skills: ["Git Version Control", "Docker Containers", "AWS Cloud Services"]
+    }
 ];
 
-// 1. Fill Header
-const headerRow = document.getElementById('headerRow');
-skills.forEach(skill => {
-    headerRow.innerHTML += `<th>${skill}</th>`;
+const container = document.getElementById('skillsContainer');
+
+// Create the parent Ordered List
+const ol = document.createElement('ol');
+ol.className = "main-categories";
+
+technicalData.forEach(item => {
+    // Create Category (LI for OL)
+    const categoryLi = document.createElement('li');
+    categoryLi.textContent = item.category;
+
+    // Create Skills List (Nested UL)
+    const skillsUl = document.createElement('ul');
+    skillsUl.className = "skill-items";
+
+    item.skills.forEach(skill => {
+        const skillLi = document.createElement('li');
+        skillLi.textContent = skill;
+        skillsUl.appendChild(skillLi);
+    });
+
+    // Nest the UL inside the Category LI
+    categoryLi.appendChild(skillsUl);
+    ol.appendChild(categoryLi);
 });
 
-// 2. Fill Body
-const matrixBody = document.getElementById('matrixBody');
-matrixBody.innerHTML = team.map(member => `
-    <tr>
-        <td style="text-align: left; font-weight: 500;">${member.name}</td>
-        ${member.scores.map(score => `
-            <td><span class="level lv-${score}">${score}</span></td>
-        `).join('')}
-    </tr>
-`).join('');
+container.appendChild(ol);
