@@ -1,23 +1,62 @@
-body {
-    font-family: Arial;
-    background: #f4f4f4;
-    padding: 20px;
+body { 
+    font-family: sans-serif; 
+    background: #f4f4f9; 
+    padding: 40px; 
 }
 
-ol {
-    font-weight: bold;
+.skills-wrapper { 
+    max-width: 500px; 
+    background: white; 
+    padding: 30px; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
 }
 
-ul {
-    font-weight: normal;
-    list-style-type: square;
+.controls {
+    margin-bottom: 20px;
 }
 
-li {
-    margin: 5px 0;
-}
-
+/* Buttons */
 button {
     margin: 5px;
     padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background: #3498db;
+    color: white;
+}
+
+button:hover {
+    background: #2980b9;
+}
+
+/* Category list */
+ol.main-categories { 
+    font-weight: bold; 
+    font-size: 1.2rem; 
+    color: #2c3e50; 
+}
+
+ol.main-categories > li { 
+    margin-bottom: 20px; 
+}
+
+/* Skills */
+ul.skill-items { 
+    font-weight: normal; 
+    font-size: 1rem; 
+    color: #555; 
+    margin-top: 8px;
+    list-style-type: square;
+}
+
+ul.skill-items li { 
+    padding: 4px 0; 
+    border-bottom: 1px solid #eee; 
+    width: 80%; 
+}
+
+ul.skill-items li:last-child { 
+    border: none; 
 }
