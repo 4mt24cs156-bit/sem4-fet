@@ -55,29 +55,9 @@
 
         /* Layer backgrounds using gradients */
 
-        #layer1 {
-            background: linear-gradient(
-                45deg,
-                rgb(255,99,71),
-                rgb(255,160,122)
-            );
-        }
-
-        #layer2 {
-            background: linear-gradient(
-                45deg,
-                rgb(30,144,255),
-                rgb(135,206,250)
-            );
-        }
-
-        #layer3 {
-            background: linear-gradient(
-                45deg,
-                rgb(60,179,113),
-                rgb(144,238,144)
-            );
-        }
+            #layer1 { background-color: tomato; }
+        #layer2 { background-color: dodgerblue; }
+        #layer3 { background-color: mediumseagreen; }
 
         /* Active layer */
         .active {
