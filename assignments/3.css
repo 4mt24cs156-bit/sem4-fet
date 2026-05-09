@@ -1,4 +1,7 @@
 >body {
+   display: flex;
+    justify-content: center;   /* Horizontal center */
+    align-items: center; 
   font-family: Arial;
   background: linear-gradient(to right,rgb(30,30,30),rgb(250,250,250));
   color: white;
