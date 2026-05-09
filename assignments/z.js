@@ -8,6 +8,6 @@
                 layers[i].classList.remove('active');
             }
 
-            // Show selected layer
+            // Show selected layer 
             document.getElementById(id).classList.add('active');
         }
