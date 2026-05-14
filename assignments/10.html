@@ -1,41 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dropdown & List Box Example</title>
+    <title>Dropdown and List Box</title>
+
+    <style>
+        body{
+            margin: 0;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial;
+
+            background: linear-gradient(
+                to right,
+                rgb(50,180,190),
+                rgb(160,160,160)
+            );
+        }
+
+        .box{
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 350px;
+            text-align: center;
+        }
+
+        select, button{
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+        }
+
+        #output{
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
+
 <body>
-   <link rel="stylesheet" href="style.css">
-<h2>Pull-Down Menu (Drop-down)</h2>
 
-<select id="dropdown" onchange="showSelection()">
-    <option value="">Select a fruit</option>
-    <option value="Apple">Apple</option>
-    <option value="Banana">Banana</option>
-    <option value="Mango">Mango</option>
-</select>
+<div class="box">
 
-<p id="result1"></p>
+    <h2>Menu Selection</h2>
 
-<hr>
+    <!-- Pull-down menu -->
+    <select id="menu" onchange="showMenu()">
+        <option value="">Select Branch</option>
+        <option value="CSE">CSE</option>
+        <option value="ISE">ISE</option>
+        <option value="AIML">AIML</option>
+    </select>
 
-<h2>List Box (Multiple Selection)</h2>
+    <!-- List box -->
+    <select id="list" size="4" multiple>
+        <option value="HTML">HTML</option>
+        <option value="CSS">CSS</option>
+        <option value="JavaScript">JavaScript</option>
+        <option value="Python">Python</option>
+    </select>
 
-<select id="listbox" size="4" multiple>
-    <option value="HTML">HTML</option>
-    <option value="CSS">CSS</option>
-    <option value="JavaScript">JavaScript</option>
-    <option value="Python">Python</option>
-</select>
+    <button id="btn">Show Selected</button>
 
-<br><br>
-<button id="btn">Show Selected</button>
+    <div id="output"></div>
 
-<p id="result2"></p>
+</div>
 
-<script src="script.js">
+<script>
+
+    // Event Handler
+    function showMenu(){
+        let value = document.getElementById("menu").value;
+        document.getElementById("output").innerHTML =
+            "Dropdown: " + value;
+    }
+
+    // Event Listener
+    document.getElementById("btn").addEventListener("click", function(){
+
+        let list = document.getElementById("list");
+        let result = [];
+
+        for(let i=0; i<list.options.length; i++){
+            if(list.options[i].selected){
+                result.push(list.options[i].value);
+            }
+        }
+
+        document.getElementById("output").innerHTML +=
+            "<br>List Box: " + result.join(", ");
+    });
 
 </script>
 
 </body>
 </html>
-  
