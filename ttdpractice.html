@@ -6,7 +6,6 @@
     <title>TTD Pilgrim Details Portal - Typing Practice</title>
     <style>
         :root {
-           
             --ttd-maroon: rgb(102, 33, 204);
             --ttd-gold: #ff9900;
             --ttd-blue: #0066cc;
@@ -66,6 +65,20 @@
             align-items: center;
         }
 
+        .config-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .persons-select {
+            padding: 4px 8px;
+            font-weight: 600;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
         .stats-group {
             display: flex;
             gap: 30px;
@@ -99,12 +112,25 @@
 
         .blueprint-data {
             font-family: "Courier New", Courier, monospace;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
             background: #f8f9fa;
-            padding: 8px 12px;
+            padding: 10px 12px;
             border-radius: 4px;
             color: #222;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        .blueprint-row {
+            margin-bottom: 6px;
+            padding-bottom: 6px;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        .blueprint-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
         }
 
         /* Main TTD Booking Content Box */
@@ -126,35 +152,52 @@
             font-size: 15px;
         }
 
-        /* Authentic TTD Row-Based Grid Table */
-        .ttd-table {
-            width: 100%;
-            border-collapse: collapse;
+        /* Vertical Scrolling Form Container */
+        .scrollable-form-body {
+            max-height: 480px;
+            overflow-y: auto;
+            background-color: #f8f9fa;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        .ttd-table th {
-            background-color: #f1f3f6;
-            color: #555555;
-            font-size: 12px;
+        /* Vertically Structured Entry Card Component */
+        .vertical-form-card {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .vertical-form-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .card-index-header {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--ttd-maroon);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 6px;
+            margin-bottom: 4px;
+        }
+
+        .form-field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-field-group label {
+            font-size: 11px;
             font-weight: 600;
+            color: #555555;
             text-transform: uppercase;
-            text-align: left;
-            padding: 12px 10px;
-            border-bottom: 2px solid var(--border-gray);
+            letter-spacing: 0.3px;
         }
-
-        .ttd-table td {
-            padding: 12px 10px;
-            border-bottom: 1px solid var(--border-gray);
-            vertical-align: middle;
-        }
-
-        .sno-col { width: 40px; text-align: center; font-size: 13px; color: #666; }
-        .name-col { width: 280px; }
-        .age-col { width: 90px; }
-        .gender-col { width: 140px; }
-        .idproof-col { width: 200px; }
-        .idnum-col { width: 260px; }
 
         /* Real Form Input Fields Styling */
         .ttd-input, .ttd-select {
@@ -175,7 +218,7 @@
             box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
         }
 
-        /* Live Error Feedback directly matches standard data-entry validation fields */
+        /* Live Error Feedback */
         .input-error-state {
             border-color: #d9534f !important;
             background-color: #f2dede !important;
@@ -208,7 +251,7 @@
         }
 
         .ttd-btn-primary:hover {
-            background-color: #8c1a46;
+            background-color: #5216a6;
         }
 
         .ttd-btn-default {
@@ -234,10 +277,16 @@
     </div>
 </div>
 
-<!-- Realtime Metrics Monitor -->
+<!-- Realtime Metrics & Configuration Monitor -->
 <div class="dashboard-panel">
-    <div>
-        <strong>Typing Trainer Engine Active</strong> (Use <kbd>Tab</kbd> to change cell columns quickly)
+    <div class="config-group">
+        <strong>Persons count:</strong>
+        <select id="personCount" class="persons-select">
+            <option value="1">1 Person</option>
+            <option value="2">2 Persons</option>
+            <option value="3">3 Persons</option>
+            <option value="4" selected>4 Persons (Max)</option>
+        </select>
     </div>
     <div class="stats-group">
         <div>Timer: <span id="timer" class="stat-value">0s</span></div>
@@ -255,59 +304,34 @@
 <!-- Main TTD Interface Imitation Table -->
 <div class="main-portal-container">
     <div class="portal-section-header">
-        Pilgrim Details (Maximum 4 Persons can be added per transaction)
+        Pilgrim Details (Vertical Navigation Environment)
     </div>
     
     <form id="ttdForm" autocomplete="off" onsubmit="event.preventDefault();">
-        <table class="ttd-table">
-            <thead>
-                <tr>
-                    <th class="sno-col">S.No</th>
-                    <th class="name-col">Name (As in ID Proof)</th>
-                    <th class="age-col">Age</th>
-                    <th class="gender-col">Gender</th>
-                    <th class="idproof-col">ID Proof Type</th>
-                    <th class="idnum-col">ID Proof Number</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="sno-col">1</td>
-                    <td class="name-col">
-                        <input type="text" id="pName" class="ttd-input" placeholder="Name">
-                    </td>
-                    <td class="age-col">
-                        <input type="text" id="pAge" class="ttd-input" maxlength="2" placeholder="Age">
-                    </td>
-                    <td class="gender-col">
-                        <select id="pGender" class="ttd-select">
-                            <option value="">Select</option>
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
-                    </td>
-                    <td class="idproof-col">
-                        <select id="pIdProof" class="ttd-select">
-                            <option value="">Select ID Proof</option>
-                            <option value="Aadhaar Card">Aadhaar Card</option>
-                            <option value="Voter ID">Voter ID</option>
-                            <option value="PAN Card">PAN Card</option>
-                            <option value="Passport">Passport</option>
-                        </select>
-                    </td>
-                    <td class="idnum-col">
-                        <input type="text" id="pIdNo" class="ttd-input" placeholder="ID Number">
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <!-- Vertically Scrollable Content Wrapper Box -->
+        <div class="scrollable-form-body" id="formFieldsContainer">
+            <!-- Dynamic elements load horizontally stacked here via JavaScript inside cards -->
+        </div>
 
+        <!-- Actions -->
         <div class="portal-footer-actions">
-            <button type="button" class="ttd-btn ttd-btn-default" onclick="refreshDataset()">Next / Clear</button>
-            <button type="submit" class="ttd-btn ttd-btn-primary" onclick="verifyFormMatch()">Continue</button>
+            <button type="button" class="ttd-btn ttd-btn-default" id="resetBtn">Reset Test</button>
+            <button type="button" class="ttd-btn ttd-btn-primary" id="submitBtn">Verify Data</button>
         </div>
     </form>
 </div>
 
 <script>
-    // Authentic data combinations mimicking standard Indian passenger inputs 
+    // Configuration & Target Data Bank
+    const namesBank = ["Ramanuja Chari", "Srinivas Rao", "Lakshmi Pillai", "K Venkatraman", "Anjali Sharma", "Balaji Naidu", "Meenakshi Iyer"];
+    const idBank = ["Aadhaar Card", "PAN Card", "Voter ID", "Passport"];
+    
+    let targetProfiles = [];
+    let startTime = null;
+    let timerInterval = null;
+    let totalKeystrokes = 0;
+    let errorKeystrokes = 0;
+
+    // Elements
+    const personCountSelect = document.getElementById('personCount');
+    const formFieldsContainer = document.getElementById('formFieldsContainer');
