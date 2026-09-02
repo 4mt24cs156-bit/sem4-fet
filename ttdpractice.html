@@ -1,316 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TTD Pilgrim Details Portal - Typing Practice</title>
-    <style>
-        :root {
-            --ttd-maroon: rgb(102, 33, 204);
-            --ttd-gold: #ff9900;
-            --ttd-blue: #0066cc;
-            --text-dark: #333333;
-            --border-gray: #dcdcdc;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #f4f6f9;
-            margin: 0;
-            padding: 0;
-            color: var(--text-dark);
-        }
-
-        /* Top Header Strip */
-        .ttd-header {
-            background-color: #ffffff;
-            border-bottom: 3px solid var(--ttd-gold);
-            padding: 10px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.06);
-        }
-
-        .ttd-logo-area {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .ttd-brand-text {
-            color: var(--ttd-maroon);
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .tagline {
-            font-size: 11px;
-            color: #666;
-            font-style: italic;
-            margin-top: 2px;
-        }
-
-        /* Practice Control Dashboard */
-        .dashboard-panel {
-            background: #fff3cd;
-            border: 1px solid #ffeeba;
-            max-width: 1200px;
-            margin: 20px auto 0 auto;
-            padding: 15px 25px;
-            border-radius: 4px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .config-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-        }
-
-        .persons-select {
-            padding: 4px 8px;
-            font-weight: 600;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-
-        .stats-group {
-            display: flex;
-            gap: 30px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .stat-value {
-            color: var(--ttd-maroon);
-            font-size: 16px;
-        }
-
-        /* Target Copy Blueprint Box */
-        .target-blueprint-container {
-            max-width: 1200px;
-            margin: 15px auto;
-            background: #ffffff;
-            border: 1px dashed var(--ttd-blue);
-            border-left: 5px solid var(--ttd-blue);
-            border-radius: 4px;
-            padding: 15px 20px;
-        }
-
-        .blueprint-title {
-            font-size: 12px;
-            text-transform: uppercase;
-            color: var(--ttd-blue);
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .blueprint-data {
-            font-family: "Courier New", Courier, monospace;
-            font-size: 14px;
-            font-weight: bold;
-            background: #f8f9fa;
-            padding: 10px 12px;
-            border-radius: 4px;
-            color: #222;
-            max-height: 120px;
-            overflow-y: auto;
-        }
-
-        .blueprint-row {
-            margin-bottom: 6px;
-            padding-bottom: 6px;
-            border-bottom: 1px dashed #e0e0e0;
-        }
-        .blueprint-row:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-
-        /* Main TTD Booking Content Box */
-        .main-portal-container {
-            max-width: 1200px;
-            margin: 15px auto 40px auto;
-            background: #ffffff;
-            border-radius: 4px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border: 1px solid var(--border-gray);
-        }
-
-        .portal-section-header {
-            background-color: #fdfefe;
-            border-bottom: 1px solid var(--border-gray);
-            padding: 15px 20px;
-            font-weight: 600;
-            color: #444444;
-            font-size: 15px;
-        }
-
-        /* Vertical Scrolling Form Container */
-        .scrollable-form-body {
-            max-height: 480px;
-            overflow-y: auto;
-            background-color: #f8f9fa;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        /* Vertically Structured Entry Card Component */
-        .vertical-form-card {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            padding: 20px;
-            background-color: #ffffff;
-            border: 1px solid var(--border-gray);
-            border-radius: 4px;
-            margin-bottom: 20px;
-        }
-        .vertical-form-card:last-child {
-            margin-bottom: 0;
-        }
-
-        .card-index-header {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--ttd-maroon);
-            border-bottom: 1px solid #eee;
-            padding-bottom: 6px;
-            margin-bottom: 4px;
-        }
-
-        .form-field-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .form-field-group label {
-            font-size: 11px;
-            font-weight: 600;
-            color: #555555;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
-
-        /* Real Form Input Fields Styling */
-        .ttd-input, .ttd-select {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 8px 10px;
-            border: 1px solid #cccccc;
-            border-radius: 3px;
-            font-size: 13px;
-            color: #333;
-            background-color: #ffffff;
-            transition: border-color 0.15s ease-in-out;
-        }
-
-        .ttd-input:focus, .ttd-select:focus {
-            border-color: #66afe9;
-            outline: 0;
-            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
-        }
-
-        /* Live Error Feedback */
-        .input-error-state {
-            border-color: #d9534f !important;
-            background-color: #f2dede !important;
-            color: #a94442 !important;
-        }
-
-        /* Action Buttons Area */
-        .portal-footer-actions {
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-top: 1px solid var(--border-gray);
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-        }
-
-        .ttd-btn {
-            padding: 8px 24px;
-            font-size: 13px;
-            font-weight: 600;
-            border-radius: 3px;
-            cursor: pointer;
-            border: 1px solid transparent;
-            transition: all 0.2s;
-        }
-
-        .ttd-btn-primary {
-            background-color: var(--ttd-maroon);
-            color: #ffffff;
-        }
-
-        .ttd-btn-primary:hover {
-            background-color: #5216a6;
-        }
-
-        .ttd-btn-default {
-            background-color: #ffffff;
-            color: #333333;
-            border-color: #cccccc;
-        }
-
-        .ttd-btn-default:hover {
-            background-color: #e6e6e6;
-        }
-    </style>
-</head>
-<body>
-
-<!-- Header Imitation -->
-<div class="ttd-header">
-    <div class="ttd-logo-area">
-        <div>
-            <div class="ttd-brand-text">Tirumala Tirupati Devasthanams</div>
-            <div class="tagline">Official Booking Portal - Pilgrim Integration Simulator</div>
-        </div>
-    </div>
-</div>
-
-<!-- Realtime Metrics & Configuration Monitor -->
-<div class="dashboard-panel">
-    <div class="config-group">
-        <strong>Persons count:</strong>
-        <select id="personCount" class="persons-select">
-            <option value="1">1 Person</option>
-            <option value="2">2 Persons</option>
-            <option value="3">3 Persons</option>
-            <option value="4" selected>4 Persons (Max)</option>
-        </select>
-    </div>
-    <div class="stats-group">
-        <div>Timer: <span id="timer" class="stat-value">0s</span></div>
-        <div>WPM: <span id="wpm" class="stat-value">0</span></div>
-        <div>Accuracy: <span id="accuracy" class="stat-value">100%</span></div>
-    </div>
-</div>
-
-<!-- Task Content Area to look at while practicing -->
-<div class="target-blueprint-container">
-    <div class="blueprint-title">Target Dataset To Type:</div>
-    <div class="blueprint-data" id="targetPrompt">Loading test profile generation matrix...</div>
-</div>
-
-<!-- Main TTD Interface Imitation Table -->
-<div class="main-portal-container">
-    <div class="portal-section-header">
-        Pilgrim Details (Vertical Navigation Environment)
-    </div>
-    
     <form id="ttdForm" autocomplete="off" onsubmit="event.preventDefault();">
-        <!-- Vertically Scrollable Content Wrapper Box -->
-        <div class="scrollable-form-body" id="formFieldsContainer">
-            <!-- Dynamic elements load horizontally stacked here via JavaScript inside cards -->
+        
+        <!-- FIX: Swapped restricted table cells for an independent scrolling container wrapper -->
+        <div class="scrollable-form-container" id="formFieldsContainer">
+            <!-- Dynamic vertical cards can now scale and stack natively inside -->
         </div>
 
         <!-- Actions -->
@@ -321,9 +13,72 @@
     </form>
 </div>
 
+<!-- Add these updated styles to your existing <style> tag to support the layout change -->
+<style>
+    /* New modern wrapper supporting overflow properties */
+    .scrollable-form-container {
+        max-height: 480px;
+        overflow-y: auto;
+        background-color: #f8f9fa;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .vertical-form-card {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 25px;
+        background-color: #ffffff;
+        border: 1px solid var(--border-gray);
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+    .vertical-form-card:last-child {
+        margin-bottom: 0;
+    }
+
+    .card-index-header {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--ttd-maroon);
+        border-bottom: 1px solid #eee;
+        padding-bottom: 6px;
+        margin-bottom: 4px;
+    }
+
+    .form-field-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .form-field-group label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #555555;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        text-align: left;
+    }
+
+    .blueprint-data {
+        line-height: 1.6;
+    }
+    
+    .blueprint-row {
+        margin-bottom: 6px;
+        padding-bottom: 6px;
+        border-bottom: 1px dashed #e0e0e0;
+    }
+    .blueprint-row:last-child {
+        border-bottom: none;
+    }
+</style>
+
 <script>
     // Configuration & Target Data Bank
-    const namesBank = ["Ramanuja Chari", "Srinivas Rao", "Lakshmi Pillai", "K Venkatraman", "Anjali Sharma", "Balaji Naidu", "Meenakshi Iyer"];
+    const namesBank = ["Ramanuja Chari", "Srinivas Rao", "Lakshmi Pillai", "K Venkatraman", "Anjali Sharma"];
     const idBank = ["Aadhaar Card", "PAN Card", "Voter ID", "Passport"];
     
     let targetProfiles = [];
@@ -335,3 +90,144 @@
     // Elements
     const personCountSelect = document.getElementById('personCount');
     const formFieldsContainer = document.getElementById('formFieldsContainer');
+    const targetPromptEl = document.getElementById('targetPrompt');
+    const timerEl = document.getElementById('timer');
+    const wpmEl = document.getElementById('wpm');
+    const accuracyEl = document.getElementById('accuracy');
+    const resetBtn = document.getElementById('resetBtn');
+
+    // Build interface rows dynamically matching selected quantity
+    function buildInterface() {
+        // Fallback default value if the person count dropdown element isn't in your HTML view header yet
+        const count = personCountSelect ? parseInt(personCountSelect.value) : 1;
+        
+        formFieldsContainer.innerHTML = '';
+        targetProfiles = [];
+        let blueprintHTML = '';
+
+        for (let i = 1; i <= count; i++) {
+            const randomName = namesBank[Math.floor(Math.random() * namesBank.length)];
+            const randomAge = Math.floor(Math.random() * (65 - 18) + 18).toString();
+            const randomGender = Math.random() > 0.5 ? "Male" : "Female";
+            const randomIdType = idBank[Math.floor(Math.random() * idBank.length)];
+            
+            let randomIdNum = "";
+            if(randomIdType === "Aadhaar Card") randomIdNum = Math.floor(100000000000 + Math.random() * 900000000000).toString();
+            else if(randomIdType === "PAN Card") randomIdNum = "ABCDE" + Math.floor(1000 + Math.random() * 9000) + "F";
+            else randomIdNum = Math.floor(100000 + Math.random() * 900000).toString();
+
+            targetProfiles.push({
+                name: randomName,
+                age: randomAge,
+                gender: randomGender,
+                idproof: randomIdType,
+                idnum: randomIdNum
+            });
+
+            blueprintHTML += `<div class="blueprint-row"><strong>[Person ${i}]</strong> NAME: ${randomName} | AGE: ${randomAge} | GENDER: ${randomGender} | ID: ${randomIdType} | NUM: ${randomIdNum}</div>`;
+
+            // Append natively styled stacking card layouts safely
+            formFieldsContainer.innerHTML += `
+                <div class="vertical-form-card">
+                    <div class="card-index-header">Person #${i} Details</div>
+                    <div class="form-field-group">
+                        <label>Name (As in ID Proof)</label>
+                        <input type="text" class="ttd-input data-cell" data-index="${i-1}" data-field="name" placeholder="Enter Name">
+                    </div>
+                    <div class="form-field-group">
+                        <label>Age</label>
+                        <input type="text" class="ttd-input data-cell" data-index="${i-1}" data-field="age" placeholder="Age">
+                    </div>
+                    <div class="form-field-group">
+                        <label>Gender</label>
+                        <select class="ttd-select data-cell" data-index="${i-1}" data-field="gender">
+                            <option value="">- Select -</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-field-group">
+                        <label>ID Proof Type</label>
+                        <select class="ttd-select data-cell" data-index="${i-1}" data-field="idproof">
+                            <option value="">- Select -</option>
+                            <option value="Aadhaar Card">Aadhaar Card</option>
+                            <option value="PAN Card">PAN Card</option>
+                            <option value="Voter ID">Voter ID</option>
+                            <option value="Passport">Passport</option>
+                        </select>
+                    </div>
+                    <div class="form-field-group">
+                        <label>ID Proof Number</label>
+                        <input type="text" class="ttd-input data-cell" data-index="${i-1}" data-field="idnum" placeholder="ID Number">
+                    </div>
+                </div>
+            `;
+        }
+
+        targetPromptEl.innerHTML = blueprintHTML;
+        attachInputListeners();
+    }
+
+    function attachInputListeners() {
+        const inputCells = document.querySelectorAll('.data-cell');
+        inputCells.forEach(cell => {
+            cell.addEventListener('input', () => {
+                startMetricsTracker();
+                totalKeystrokes++;
+
+                const index = parseInt(cell.getAttribute('data-index'));
+                const field = cell.getAttribute('data-field');
+                const targetValue = targetProfiles[index][field];
+                const currentValue = cell.value;
+
+                if (targetValue.indexOf(currentValue) !== 0) {
+                    cell.classList.add('input-error-state');
+                    errorKeystrokes++;
+                } else {
+                    cell.classList.remove('input-error-state');
+                }
+                updateMetrics();
+            });
+        });
+    }
+
+    function startMetricsTracker() {
+        if (!startTime) {
+            startTime = new Date();
+            timerInterval = setInterval(updateMetrics, 500);
+        }
+    }
+
+    function updateMetrics() {
+        if (!startTime) return;
+        const timeElapsed = (new Date() - startTime) / 1000;
+        timerEl.textContent = Math.floor(timeElapsed) + "s";
+
+        if (timeElapsed > 1) {
+            const words = totalKeystrokes / 5;
+            const wpm = Math.round(words / (timeElapsed / 60));
+            wpmEl.textContent = wpm >= 0 ? wpm : 0;
+        }
+
+        if (totalKeystrokes > 0) {
+            const score = Math.round(((totalKeystrokes - errorKeystrokes) / totalKeystrokes) * 100);
+            accuracyEl.textContent = (score < 0 ? 0 : score) + "%";
+        }
+    }
+
+    function resetSimulation() {
+        clearInterval(timerInterval);
+        startTime = null;
+        totalKeystrokes = 0;
+        errorKeystrokes = 0;
+        timerEl.textContent = "0s";
+        wpmEl.textContent = "0";
+        accuracyEl.textContent = "100%";
+        buildInterface();
+    }
+
+    resetBtn.addEventListener('click', resetSimulation);
+    if(personCountSelect) personCountSelect.addEventListener('change', resetSimulation);
+
+    window.onload = buildInterface;
+</script>
