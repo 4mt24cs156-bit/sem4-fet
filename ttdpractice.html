@@ -3,302 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TTD Booking Typing Practice</title>
+    <title>TTD Pilgrim Details Portal - Typing Practice</title>
     <style>
         :root {
-            --ttd-maroon: #800000;
-            --ttd-gold: #ffcc00;
-            --bg-light: #fdfaf4;
+            --ttd-maroon: #a92156;
+            --ttd-gold: #ff9900;
+            --ttd-blue: #0066cc;
+            --text-dark: #333333;
+            --border-gray: #dcdcdc;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: var(--bg-light);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f6f9;
             margin: 0;
-            padding: 20px;
-            color: #333;
+            padding: 0;
+            color: var(--text-dark);
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-top: 5px solid var(--ttd-maroon);
-        }
-
-        h2 {
-            color: var(--ttd-maroon);
-            text-align: center;
-            margin-bottom: 5px;
-        }
-
-        .subtitle {
-            text-align: center;
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 25px;
-        }
-
-        .stats-panel {
+        /* Top Header Strip */
+        .ttd-header {
+            background-color: #ffffff;
+            border-bottom: 3px solid var(--ttd-gold);
+            padding: 10px 40px;
             display: flex;
-            justify-content: space-around;
-            background: #fff9e6;
-            padding: 15px;
-            border: 1px solid var(--ttd-gold);
-            border-radius: 5px;
-            margin-bottom: 25px;
-            font-weight: bold;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.06);
         }
 
-        .stat-box span {
-            color: var(--ttd-maroon);
-            font-size: 18px;
-        }
-
-        .target-box {
-            background: #f1f1f1;
-            padding: 15px;
-            border-left: 5px solid var(--ttd-maroon);
-            font-family: monospace;
-            font-size: 16px;
-            margin-bottom: 20px;
-            white-space: pre-wrap;
-            letter-spacing: 0.5px;
-        }
-
-        .highlight-current {
-            background-color: #ffe680;
-            text-decoration: underline;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .ttd-logo-area {
+            display: flex;
+            align-items: center;
             gap: 15px;
         }
 
-        .form-group {
+        .ttd-brand-text {
+            color: var(--ttd-maroon);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .tagline {
+            font-size: 11px;
+            color: #666;
+            font-style: italic;
+            margin-top: 2px;
+        }
+
+        /* Practice Control Dashboard */
+        .dashboard-panel {
+            background: #fff3cd;
+            border: 1px solid #ffeeba;
+            max-width: 1200px;
+            margin: 20px auto 0 auto;
+            padding: 15px 25px;
+            border-radius: 4px;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .form-group.full-width {
-            grid-column: span 2;
+        .stats-group {
+            display: flex;
+            gap: 30px;
+            font-size: 14px;
+            font-weight: 600;
         }
 
-        label {
+        .stat-value {
+            color: var(--ttd-maroon);
+            font-size: 16px;
+        }
+
+        /* Target Copy Blueprint Box */
+        .target-blueprint-container {
+            max-width: 1200px;
+            margin: 15px auto;
+            background: #ffffff;
+            border: 1px dashed var(--ttd-blue);
+            border-left: 5px solid var(--ttd-blue);
+            border-radius: 4px;
+            padding: 15px 20px;
+        }
+
+        .blueprint-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--ttd-blue);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .blueprint-data {
+            font-family: "Courier New", Courier, monospace;
+            font-size: 15px;
+            font-weight: bold;
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 4px;
+            color: #222;
+        }
+
+        /* Main TTD Booking Content Box */
+        .main-portal-container {
+            max-width: 1200px;
+            margin: 15px auto 40px auto;
+            background: #ffffff;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-gray);
+        }
+
+        .portal-section-header {
+            background-color: #fdfefe;
+            border-bottom: 1px solid var(--border-gray);
+            padding: 15px 20px;
+            font-weight: 600;
+            color: #444444;
+            font-size: 15px;
+        }
+
+        /* Authentic TTD Row-Based Grid Table */
+        .ttd-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .ttd-table th {
+            background-color: #f1f3f6;
+            color: #555555;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-align: left;
+            padding: 12px 10px;
+            border-bottom: 2px solid var(--border-gray);
+        }
+
+        .ttd-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--border-gray);
+            vertical-align: middle;
+        }
+
+        .sno-col { width: 40px; text-align: center; font-size: 13px; color: #666; }
+        .name-col { width: 280px; }
+        .age-col { width: 90px; }
+        .gender-col { width: 140px; }
+        .idproof-col { width: 200px; }
+        .idnum-col { width: 260px; }
+
+        /* Real Form Input Fields Styling */
+        .ttd-input, .ttd-select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 8px 10px;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
             font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #444;
+            color: #333;
+            background-color: #ffffff;
+            transition: border-color 0.15s ease-in-out;
         }
 
-        input, select {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-            font-family: monospace;
+        .ttd-input:focus, .ttd-select:focus {
+            border-color: #66afe9;
+            outline: 0;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
         }
 
-        input:focus, select:focus {
-            outline: 2px solid var(--ttd-maroon);
+        /* Live Error Feedback directly matches standard data-entry validation fields */
+        .input-error-state {
+            border-color: #d9534f !important;
+            background-color: #f2dede !important;
+            color: #a94442 !important;
         }
 
-        .input-error {
-            border-color: #ff3333 !important;
-            background-color: #ffe6e6;
-        }
-
-        .btn-container {
-            margin-top: 25px;
+        /* Action Buttons Area */
+        .portal-footer-actions {
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-top: 1px solid var(--border-gray);
             display: flex;
-            gap: 10px;
+            justify-content: flex-end;
+            gap: 15px;
         }
 
-        button {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
+        .ttd-btn {
+            padding: 8px 24px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 3px;
             cursor: pointer;
-            font-size: 14px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
         }
 
-        .btn-primary {
+        .ttd-btn-primary {
             background-color: var(--ttd-maroon);
-            color: white;
-            flex: 2;
+            color: #ffffff;
         }
 
-        .btn-secondary {
-            background-color: #666;
-            color: white;
-            flex: 1;
+        .ttd-btn-primary:hover {
+            background-color: #8c1a46;
         }
 
-        button:hover {
-            opacity: 0.9;
+        .ttd-btn-default {
+            background-color: #ffffff;
+            color: #333333;
+            border-color: #cccccc;
+        }
+
+        .ttd-btn-default:hover {
+            background-color: #e6e6e6;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h2>TTD Pilgrim Details Typing Practice</h2>
-    <div class="subtitle">Match the target text precisely using keyboard shortcuts (Tab) to switch fields rapidly.</div>
-
-    <!-- Live Performance Stats -->
-    <div class="stats-panel">
-        <div class="stat-box">Time: <span id="timer">0s</span></div>
-        <div class="stat-box">WPM: <span id="wpm">0</span></div>
-        <div class="stat-box">Accuracy: <span id="accuracy">100%</span></div>
-    </div>
-
-    <!-- Target Blueprint Text to Copy -->
-    <div class="target-box" id="targetPrompt">Loading practice text...</div>
-
-    <!-- Practice Form Grid -->
-    <form id="bookingForm" autocomplete="off" onsubmit="event.preventDefault();">
-        <div class="form-grid">
-            <div class="form-group">
-                <label>Pilgrim Name (As in ID)</label>
-                <input type="text" id="pilgrimName" data-field="Name" placeholder="Type target name">
-            </div>
-
-            <div class="form-group">
-                <label>Age</label>
-                <input type="text" id="age" data-field="Age" maxlength="2" placeholder="Type age">
-            </div>
-
-            <div class="form-group">
-                <label>Gender</label>
-                <select id="gender" data-field="Gender">
-                    <option value="">Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Proof of Identity</label>
-                <select id="idProof" data-field="ID Proof">
-                    <option value="">Select ID Proof</option>
-                    <option value="Aadhar Card">Aadhar Card</option>
-                    <option value="Voter ID">Voter ID</option>
-                    <option value="PAN Card">PAN Card</option>
-                    <option value="Passport">Passport</option>
-                </select>
-            </div>
-
-            <div class="form-group full-width">
-                <label>ID Card Number</label>
-                <input type="text" id="idNumber" data-field="ID Number" placeholder="Type ID number string">
-            </div>
+<!-- Header Imitation -->
+<div class="ttd-header">
+    <div class="ttd-logo-area">
+        <div>
+            <div class="ttd-brand-text">Tirumala Tirupati Devasthanams</div>
+            <div class="tagline">Official Booking Portal - Pilgrim Integration Simulator</div>
         </div>
+    </div>
+</div>
 
-        <div class="btn-container">
-            <button type="button" class="btn-secondary" onclick="resetPractice()">Reset / New Data</button>
-            <button type="submit" class="btn-primary" onclick="checkSubmission()">Submit Details</button>
+<!-- Realtime Metrics Monitor -->
+<div class="dashboard-panel">
+    <div>
+        <strong>Typing Trainer Engine Active</strong> (Use <kbd>Tab</kbd> to change cell columns quickly)
+    </div>
+    <div class="stats-group">
+        <div>Timer: <span id="timer" class="stat-value">0s</span></div>
+        <div>WPM: <span id="wpm" class="stat-value">0</span></div>
+        <div>Accuracy: <span id="accuracy" class="stat-value">100%</span></div>
+    </div>
+</div>
+
+<!-- Task Content Area to look at while practicing -->
+<div class="target-blueprint-container">
+    <div class="blueprint-title">Target Dataset To Type:</div>
+    <div class="blueprint-data" id="targetPrompt">Loading test profile generation matrix...</div>
+</div>
+
+<!-- Main TTD Interface Imitation Table -->
+<div class="main-portal-container">
+    <div class="portal-section-header">
+        Pilgrim Details (Maximum 4 Persons can be added per transaction)
+    </div>
+    
+    <form id="ttdForm" autocomplete="off" onsubmit="event.preventDefault();">
+        <table class="ttd-table">
+            <thead>
+                <tr>
+                    <th class="sno-col">S.No</th>
+                    <th class="name-col">Name (As in ID Proof)</th>
+                    <th class="age-col">Age</th>
+                    <th class="gender-col">Gender</th>
+                    <th class="idproof-col">ID Proof Type</th>
+                    <th class="idnum-col">ID Proof Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="sno-col">1</td>
+                    <td class="name-col">
+                        <input type="text" id="pName" class="ttd-input" placeholder="Name">
+                    </td>
+                    <td class="age-col">
+                        <input type="text" id="pAge" class="ttd-input" maxlength="2" placeholder="Age">
+                    </td>
+                    <td class="gender-col">
+                        <select id="pGender" class="ttd-select">
+                            <option value="">Select</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </td>
+                    <td class="idproof-col">
+                        <select id="pIdProof" class="ttd-select">
+                            <option value="">Select ID Proof</option>
+                            <option value="Aadhaar Card">Aadhaar Card</option>
+                            <option value="Voter ID">Voter ID</option>
+                            <option value="PAN Card">PAN Card</option>
+                            <option value="Passport">Passport</option>
+                        </select>
+                    </td>
+                    <td class="idnum-col">
+                        <input type="text" id="pIdNo" class="ttd-input" placeholder="ID Number">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="portal-footer-actions">
+            <button type="button" class="ttd-btn ttd-btn-default" onclick="refreshDataset()">Next / Clear</button>
+            <button type="submit" class="ttd-btn ttd-btn-primary" onclick="verifyFormMatch()">Continue</button>
         </div>
     </form>
 </div>
 
 <script>
-    // Pool of realistic target data objects for random practice rotation
-    const dataPool = [
-        { Name: "RAMESH KUMAR", Age: "42", Gender: "Male", ID_Proof: "Aadhar Card", ID_Number: "543210987654" },
-        { Name: "SITA LAKSHMI", Age: "38", Gender: "Female", ID_Proof: "PAN Card", ID_Number: "ABCDE1234F" },
-        { Name: "K VENKATESH", Age: "61", Gender: "Male", ID_Proof: "Voter ID", ID_Number: "XYZ9876543" },
-        { Name: "ANANYA REDDY", Age: "26", Gender: "Female", ID_Proof: "Passport", ID_Number: "Z1234567" },
-        { Name: "SIVAKUMAR M", Age: "50", Gender: "Male", ID_Proof: "Aadhar Card", ID_Number: "987654321012" }
-    ];
-
-    let currentTarget = {};
-    let startTime = null;
-    let timerInterval = null;
-    let totalKeystrokes = 0;
-    let wrongKeystrokes = 0;
-    let isTracking = false;
-
-    const inputs = [
-        document.getElementById('pilgrimName'),
-        document.getElementById('age'),
-        document.getElementById('gender'),
-        document.getElementById('idProof'),
-        document.getElementById('idNumber')
-    ];
-
-    function initPractice() {
-        // Pick random test data
-        currentTarget = dataPool[Math.floor(Math.random() * dataPool.length)];
-        
-        // Display target text for the user to copy
-        document.getElementById('targetPrompt').innerHTML = 
-            `<strong>TARGET PROFILE:</strong>\n` +
-            `Name: <span class="highlight-field">${currentTarget.Name}</span> | ` +
-            `Age: <span class="highlight-field">${currentTarget.Age}</span> | ` +
-            `Gender: <span class="highlight-field">${currentTarget.Gender}</span>\n` +
-            `ID Type: <span class="highlight-field">${currentTarget.ID_Proof}</span> | ` +
-            `ID Number: <span class="highlight-field">${currentTarget.ID_Number}</span>`;
-        
-        // Clear all inputs
-        inputs.forEach(input => {
-            input.value = "";
-            input.classList.remove('input-error');
-        });
-        
-        // Reset operational variables
-        clearInterval(timerInterval);
-        startTime = null;
-        totalKeystrokes = 0;
-        wrongKeystrokes = 0;
-        isTracking = false;
-        document.getElementById('timer').innerText = "0s";
-        document.getElementById('wpm').innerText = "0";
-        document.getElementById('accuracy').innerText = "100%";
-        
-        inputs[0].focus();
-    }
-
-    function startTimer() {
-        startTime = Date.now();
-        isTracking = true;
-        timerInterval = setInterval(() => {
-            let elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
-            document.getElementById('timer').innerText = elapsedSeconds + "s";
-            calculateWPM(elapsedSeconds);
-        }, 1000);
-    }
-
-    // Monitor keystrokes for accurate metrics
-    inputs.forEach(input => {
-        input.addEventListener('input', (e) => {
-            if (!isTracking) startTimer();
-            totalKeystrokes++;
-            
-            // Validate input characters live to train perfect accuracy
-            let targetValue = "";
-            if(input.id === 'pilgrimName') targetValue = currentTarget.Name;
-            if(input.id === 'age') targetValue = currentTarget.Age;
-            if(input.id === 'gender') targetValue = currentTarget.Gender;
-            if(input.id === 'idProof') targetValue = currentTarget.ID_Proof;
-            if(input.id === 'idNumber') targetValue = currentTarget.ID_Number;
-
-            // Highlight red if typing drifts from target content
-            if (!targetValue.startsWith(input.value)) {
-                input.classList.add('input-error');
-                wrongKeystrokes++;
-            } else {
-                input.classList.remove('input-error');
-            }
-            updateAccuracy();
-        });
-    });
-
-    function updateAccuracy() {
-        if (totalKeystrokes === 0) return;
-        let acc = ((totalKeystrokes - wrongKeystrokes) / totalKeystrokes) * 100;
+    // Authentic data combinations mimicking standard Indian passenger inputs 
