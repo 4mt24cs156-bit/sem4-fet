@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTD Booking Typing Practice</title>
+    <style>
+        :root {
+            --ttd-maroon: #800000;
+            --ttd-gold: #ffcc00;
+            --bg-light: #fdfaf4;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--ttd-maroon);
+        }
+
+        h2 {
+            color: var(--ttd-maroon);
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .stats-panel {
+            display: flex;
+            justify-content: space-around;
+            background: #fff9e6;
+            padding: 15px;
+            border: 1px solid var(--ttd-gold);
+            border-radius: 5px;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .stat-box span {
+            color: var(--ttd-maroon);
+            font-size: 18px;
+        }
+
+        .target-box {
+            background: #f1f1f1;
+            padding: 15px;
+            border-left: 5px solid var(--ttd-maroon);
+            font-family: monospace;
+            font-size: 16px;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+            letter-spacing: 0.5px;
+        }
+
+        .highlight-current {
+            background-color: #ffe680;
+            text-decoration: underline;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        input, select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: monospace;
+        }
+
+        input:focus, select:focus {
+            outline: 2px solid var(--ttd-maroon);
+        }
+
+        .input-error {
+            border-color: #ff3333 !important;
+            background-color: #ffe6e6;
+        }
+
+        .btn-container {
+            margin-top: 25px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background-color: var(--ttd-maroon);
+            color: white;
+            flex: 2;
+        }
+
+        .btn-secondary {
+            background-color: #666;
+            color: white;
+            flex: 1;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>TTD Pilgrim Details Typing Practice</h2>
+    <div class="subtitle">Match the target text precisely using keyboard shortcuts (Tab) to switch fields rapidly.</div>
+
+    <!-- Live Performance Stats -->
+    <div class="stats-panel">
+        <div class="stat-box">Time: <span id="timer">0s</span></div>
+        <div class="stat-box">WPM: <span id="wpm">0</span></div>
+        <div class="stat-box">Accuracy: <span id="accuracy">100%</span></div>
+    </div>
+
+    <!-- Target Blueprint Text to Copy -->
+    <div class="target-box" id="targetPrompt">Loading practice text...</div>
+
+    <!-- Practice Form Grid -->
+    <form id="bookingForm" autocomplete="off" onsubmit="event.preventDefault();">
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Pilgrim Name (As in ID)</label>
+                <input type="text" id="pilgrimName" data-field="Name" placeholder="Type target name">
+            </div>
+
+            <div class="form-group">
+                <label>Age</label>
+                <input type="text" id="age" data-field="Age" maxlength="2" placeholder="Type age">
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <select id="gender" data-field="Gender">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Proof of Identity</label>
+                <select id="idProof" data-field="ID Proof">
+                    <option value="">Select ID Proof</option>
+                    <option value="Aadhar Card">Aadhar Card</option>
+                    <option value="Voter ID">Voter ID</option>
+                    <option value="PAN Card">PAN Card</option>
+                    <option value="Passport">Passport</option>
+                </select>
+            </div>
+
+            <div class="form-group full-width">
+                <label>ID Card Number</label>
+                <input type="text" id="idNumber" data-field="ID Number" placeholder="Type ID number string">
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button type="button" class="btn-secondary" onclick="resetPractice()">Reset / New Data</button>
+            <button type="submit" class="btn-primary" onclick="checkSubmission()">Submit Details</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Pool of realistic target data objects for random practice rotation
+    const dataPool = [
+        { Name: "RAMESH KUMAR", Age: "42", Gender: "Male", ID_Proof: "Aadhar Card", ID_Number: "543210987654" },
+        { Name: "SITA LAKSHMI", Age: "38", Gender: "Female", ID_Proof: "PAN Card", ID_Number: "ABCDE1234F" },
+        { Name: "K VENKATESH", Age: "61", Gender: "Male", ID_Proof: "Voter ID", ID_Number: "XYZ9876543" },
+        { Name: "ANANYA REDDY", Age: "26", Gender: "Female", ID_Proof: "Passport", ID_Number: "Z1234567" },
+        { Name: "SIVAKUMAR M", Age: "50", Gender: "Male", ID_Proof: "Aadhar Card", ID_Number: "987654321012" }
+    ];
+
+    let currentTarget = {};
+    let startTime = null;
+    let timerInterval = null;
+    let totalKeystrokes = 0;
+    let wrongKeystrokes = 0;
+    let isTracking = false;
+
+    const inputs = [
+        document.getElementById('pilgrimName'),
+        document.getElementById('age'),
+        document.getElementById('gender'),
+        document.getElementById('idProof'),
+        document.getElementById('idNumber')
+    ];
+
+    function initPractice() {
+        // Pick random test data
+        currentTarget = dataPool[Math.floor(Math.random() * dataPool.length)];
+        
+        // Display target text for the user to copy
+        document.getElementById('targetPrompt').innerHTML = 
+            `<strong>TARGET PROFILE:</strong>\n` +
+            `Name: <span class="highlight-field">${currentTarget.Name}</span> | ` +
+            `Age: <span class="highlight-field">${currentTarget.Age}</span> | ` +
+            `Gender: <span class="highlight-field">${currentTarget.Gender}</span>\n` +
+            `ID Type: <span class="highlight-field">${currentTarget.ID_Proof}</span> | ` +
+            `ID Number: <span class="highlight-field">${currentTarget.ID_Number}</span>`;
+        
+        // Clear all inputs
+        inputs.forEach(input => {
+            input.value = "";
+            input.classList.remove('input-error');
+        });
+        
+        // Reset operational variables
+        clearInterval(timerInterval);
+        startTime = null;
+        totalKeystrokes = 0;
+        wrongKeystrokes = 0;
+        isTracking = false;
+        document.getElementById('timer').innerText = "0s";
+        document.getElementById('wpm').innerText = "0";
+        document.getElementById('accuracy').innerText = "100%";
+        
+        inputs[0].focus();
+    }
+
+    function startTimer() {
+        startTime = Date.now();
+        isTracking = true;
+        timerInterval = setInterval(() => {
+            let elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+            document.getElementById('timer').innerText = elapsedSeconds + "s";
+            calculateWPM(elapsedSeconds);
+        }, 1000);
+    }
+
+    // Monitor keystrokes for accurate metrics
+    inputs.forEach(input => {
+        input.addEventListener('input', (e) => {
+            if (!isTracking) startTimer();
+            totalKeystrokes++;
+            
+            // Validate input characters live to train perfect accuracy
+            let targetValue = "";
+            if(input.id === 'pilgrimName') targetValue = currentTarget.Name;
+            if(input.id === 'age') targetValue = currentTarget.Age;
+            if(input.id === 'gender') targetValue = currentTarget.Gender;
+            if(input.id === 'idProof') targetValue = currentTarget.ID_Proof;
+            if(input.id === 'idNumber') targetValue = currentTarget.ID_Number;
+
+            // Highlight red if typing drifts from target content
+            if (!targetValue.startsWith(input.value)) {
+                input.classList.add('input-error');
+                wrongKeystrokes++;
+            } else {
+                input.classList.remove('input-error');
+            }
+            updateAccuracy();
+        });
+    });
+
+    function updateAccuracy() {
+        if (totalKeystrokes === 0) return;
+        let acc = ((totalKeystrokes - wrongKeystrokes) / totalKeystrokes) * 100;
