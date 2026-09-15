@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">MyPortfolio</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h1>Hi, I'm a Developer</h1>
+                <p>Welcome to my personal portfolio. I build clean, modern, and responsive web applications. I love solving problems through code and continuously learning new technologies.</p>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="section bg-light">
+            <div class="container">
+                <h2>Education</h2>
+                <div class="education-item">
+                    <h3>Bachelor of Science in Computer Science</h3>
+                    <p class="meta">University Name | 2022 - 2026</p>
+                    <p>Focused on software engineering, web development fundamentals, and data structures.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="container">
+                <h2>Projects</h2>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h3>E-Commerce Interface</h3>
+                        <p>A fully responsive shopping cart layout built with clean CSS Grid and Flexbox layouts.</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>Task Manager App</h3>
+                        <p>A functional dashboard concept tracking productivity, timelines, and priority items.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section bg-light">
+            <div class="container">
+                <h2>Contact Me</h2>
+                <p>Feel free to reach out if you're looking for a developer or want to collaborate on a project.</p>
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 MyPortfolio. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
