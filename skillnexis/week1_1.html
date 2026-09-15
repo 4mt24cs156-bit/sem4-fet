@@ -2,268 +2,82 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Personal Portfolio</title>
+    <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
-    <style> * {
+    <style> 
+    
+    body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    --primary-color: #2563eb;
-    --text-dark: #1f2937;
-    --text-light: #4b5563;
-    --bg-light: #f3f4f6;
-    --white: #ffffff;
-}
-
-html {
-    scroll-behavior: smooth;
-    font-family: system-ui, -apple-system, sans-serif;
-    color: var(--text-dark);
     line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
-/* Container Structure */
-.container {
-    width: 90%;
-    max-width: 1100px;
-    margin: 0 auto;
-}
-
-.section {
-    padding: 80px 0;
-}
-
-.bg-light {
-    background-color: var(--bg-light);
-}
-
-h2 {
-    font-size: 2.2rem;
-    margin-bottom: 30px;
-    position: relative;
-}
-
-/* Header & Navigation */
 header {
-    background-color: var(--white);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    background: #35424a;
+    color: #ffffff;
+    text-align: center;
+    padding: 2rem;
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 5%;
+section {
+    background: #ffffff;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+    border-radius: 5px;
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
+img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--text-light);
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.nav-links a:hover {
-    color: var(--primary-color);
-}
-
-/* About Section */
-#about h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-#about p {
-    font-size: 1.2rem;
-    color: var(--text-light);
-    max-width: 700px;
-}
-
-/* Education Section */
-.education-item {
-    background: var(--white);
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-
-.meta {
-    color: var(--primary-color);
-    font-weight: 500;
-    margin: 5px 0 15px 0;
-}
-
-/* Projects Section */
-.project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-}
-
-.project-card {
-    background: var(--white);
-    padding: 25px;
-    border-radius: 8px;
-    border: 1px solid #e5e7eb;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-}
-
-.project-card h3 {
-    margin-bottom: 10px;
-}
-
-/* Contact Section Form */
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 500px;
-    margin-top: 20px;
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    font-size: 1rem;
-}
-
-.btn {
-    background-color: var(--primary-color);
-    color: var(--white);
-    padding: 12px 24px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    width: fit-content;
-    transition: background 0.3s;
-}
-
-.btn:hover {
-    background-color: #1d4ed8;
-}
-
-/* Footer */
 footer {
     text-align: center;
-    padding: 30px;
-    background-color: var(--text-dark);
-    color: var(--white);
-    font-size: 0.9rem;
-}
-
-/* Responsive Mobile Layout adjustments */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        gap: 15px;
-    }
-    #about h1 {
-        font-size: 2.2rem;
-    }
+    padding: 10px;
+    background: #35424a;
+    color: #ffffff;
 }
 </style>
 <body>
-
-    <!-- Navigation Bar -->
     <header>
-        <nav class="navbar">
-            <div class="logo">MyPortfolio</div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <h1>Jane Doe</h1>
+        <p>Web Developer & Designer</p>
     </header>
 
-    <!-- Main Content -->
-    <main>
-        <!-- About Section -->
-        <section id="about" class="section">
-            <div class="container">
-                <h1>Hi, I'm a Developer</h1>
-                <p>Welcome to my personal portfolio. I build clean, modern, and responsive web applications. I love solving problems through code and continuously learning new technologies.</p>
-            </div>
-        </section>
+    <section id="about">
+        <h2>About Me</h2>
+        <img src="profile.jpg" alt="Profile Photo of Jane Doe">
+        <p>I am a student learning web design and building modern web pages.</p>
+    </section>
 
-        <!-- Education Section -->
-        <section id="education" class="section bg-light">
-            <div class="container">
-                <h2>Education</h2>
-                <div class="education-item">
-                    <h3>Bachelor of Science in Computer Science</h3>
-                    <p class="meta">University Name | 2022 - 2026</p>
-                    <p>Focused on software engineering, web development fundamentals, and data structures.</p>
-                </div>
-            </div>
-        </section>
+    <section id="education">
+        <h2>Education</h2>
+        <p>Bachelor of Science in Computer Science - University Name</p>
+    </section>
 
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <div class="container">
-                <h2>Projects</h2>
-                <div class="project-grid">
-                    <div class="project-card">
-                        <h3>E-Commerce Interface</h3>
-                        <p>A fully responsive shopping cart layout built with clean CSS Grid and Flexbox layouts.</p>
-                    </div>
-                    <div class="project-card">
-                        <h3>Task Manager App</h3>
-                        <p>A functional dashboard concept tracking productivity, timelines, and priority items.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li>HTML5 & CSS3</li>
+            <li>Basic JavaScript</li>
+            <li>Responsive Design</li>
+        </ul>
+    </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="section bg-light">
-            <div class="container">
-                <h2>Contact Me</h2>
-                <p>Feel free to reach out if you're looking for a developer or want to collaborate on a project.</p>
-                <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <textarea placeholder="Your Message" rows="5" required></textarea>
-                    <button type="submit" class="btn">Send Message</button>
-                </form>
-            </div>
-        </section>
-    </main>
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: jane.doe@example.com</p>
+    </section>
 
-    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 MyPortfolio. All rights reserved.</p>
+        <p>&copy; 2026 Jane Doe</p>
     </footer>
-
 </body>
 </html>
