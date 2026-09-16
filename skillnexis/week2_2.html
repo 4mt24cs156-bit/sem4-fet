@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock & Countdown Timer</title>
+    <style>
+        /* Base Reset & Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #e0e6ed;
+        }
+
+        /* Clock Styling */
+        .clock-display {
+            font-size: 3.5rem;
+            font-weight: bold;
+            font-family: monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px 0;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+            color: #00ffcc;
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+        }
+
+        /* Countdown Styling */
+        .countdown-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #ff9f43;
+        }
+
+        .countdown-display {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .time-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .time-box span {
+            display: block;
+        }
+
+        .number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #a4b0be;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Digital Clock Section -->
+        <h1>Digital Clock</h1>
+        <div class="clock-display" id="clock">00:00:00</div>
+
+        <!-- Countdown Timer Section -->
+        <div class="countdown-title">Countdown to New Year 🎆</div>
+        <div class="countdown-display">
+            <div class="time-box">
+                <span class="number" id="days">00</span>
+                <span class="label">Days</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="hours">00</span>
+                <span class="label">Hours</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="minutes">00</span>
+                <span class="label">Mins</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="seconds">00</span>
+                <span class="label">Secs</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Helper function to pad single digits with a leading zero (e.g., 9 becomes 09)
+        function formatTime(time) {
+            return time < 10 ? `0${time}` : time;
+        }
+
+        // 1. Digital Clock Function
+        function updateClock() {
+            const now = new Date();
+            const hours = formatTime(now.getHours());
+            const minutes = formatTime(now.getMinutes());
+            const seconds = formatTime(now.getSeconds());
+
+            document.getElementById('clock').innerText = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // 2. Countdown Timer Function
+        function updateCountdown() {
+            const currentYear = new Date().getFullYear();
+            const nextNewYear = new Date(`January 1, ${currentYear + 1} 00:00:00`);
+            const now = new Date();
+            
+            const timeDifference = nextNewYear - now; // Difference in milliseconds
+
+            // Mathematical conversions from milliseconds
+            const d = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const h = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            // Update DOM with padded values
+            document.getElementById('days').innerText = formatTime(d);
+            document.getElementById('hours').innerText = formatTime(h);
+            document.getElementById('minutes').innerText = formatTime(m);
+            document.getElementById('seconds').innerText = formatTime(s);
+        }
+
+        // Run both updates immediately when page loads
+        updateClock();
+        updateCountdown();
+
+        // Use setInterval to refresh the clock and countdown every 1 second (1000ms)
+        setInterval(() => {
+            updateClock();
+            updateCountdown();
+        }, 1000);
+    </script>
+</body>
+</html>
