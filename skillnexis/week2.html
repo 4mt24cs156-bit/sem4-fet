@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Image Gallery with Lightbox</title>
+    <style>
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+
+        /* Gallery Grid Layout */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Image Wrapper & Hover Animations */
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            aspect-ratio: 4 / 3;
+            background-color: #ddd;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+
+        /* Hover Zoom and Filter Animation */
+        .gallery-item:hover img {
+            transform: scale(1.08);
+            filter: brightness(90%);
+        }
+
+        /* Lightbox Overlay */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        /* Active Lightbox State */
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-content {
+            max-width: 85%;
+            max-height: 85%;
+            border-radius: 4px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: #fff;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Interactive Image Gallery</h1>
+
+    <!-- 6-8 Image Grid -->
+    <div class="gallery-container">
+        <div class="gallery-item"><img src="https://picsum.photos" alt="Gallery Image 1"></div>
+        <div class="gallery-item"><img src="https://picsum.photos" alt="Gallery Image 2"></div>
+        <div class="gallery-item"><img src="https://picsum.photos" alt="Gallery Image 3"></div>
+        <div class="gallery-item"><img src="https://picsum.photos" alt="Gallery Image 4"></div>
+        <div class="gallery-item"><img src="https://picsum.photos" alt="Gallery Image 5"></div>
+        <div class="gallery-item"><img src="https://picsum.photos" alt="Gallery Image 6"></div>
+        <div class="gallery-item"><img src="https://picsum.photos" alt="Gallery Image 7"></div>
+        <div class="gallery-item"><img src="https://picsum.photos" alt="Gallery Image 8"></div>
+    </div>
+
+    <!-- Lightbox Modal Container -->
+    <div class="lightbox" id="lightbox">
+        <span class="close-btn" id="closeBtn">&times;</span>
+        <img class="lightbox-content" id="lightboxImg" src="" alt="Enlarged View">
+    </div>
+
+    <!-- Basic JavaScript Logic -->
+    <script>
+        // DOM Elements Selection
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const closeBtn = document.getElementById('closeBtn');
+
+        // Event Handling: Open Lightbox on Click
+        galleryItems.forEach(image => {
+            image.addEventListener('click', () => {
+                lightboxImg.src = image.src; // Pass clicked image source to Lightbox
+                lightbox.classList.add('active'); // Show Lightbox
+            });
+        });
+
+        // Event Handling: Close Lightbox via Close Button
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        // Event Handling: Close Lightbox by clicking outside the image
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
