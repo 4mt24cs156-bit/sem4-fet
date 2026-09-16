@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Clock & Countdown Timer</title>
     <style>
-        /* Base Reset & Styling */
-        * {
-            margin: 0;
+       
+        * { margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
@@ -23,10 +22,9 @@
             align-items: center;
             padding: 20px;
         }
-
         .container {
             text-align: center;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(20, 150, 10, 0.1);
             backdrop-filter: blur(10px);
             padding: 40px;
             border-radius: 16px;
@@ -35,7 +33,6 @@
             max-width: 500px;
             width: 100%;
         }
-
         h1 {
             font-size: 1.8rem;
             margin-bottom: 10px;
@@ -44,7 +41,7 @@
             color: #e0e6ed;
         }
 
-        /* Clock Styling */
+        
         .clock-display {
             font-size: 3.5rem;
             font-weight: bold;
@@ -57,26 +54,21 @@
             color: #00ffcc;
             text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
         }
-
-        /* Countdown Styling */
         .countdown-title {
             font-size: 1.2rem;
             margin-bottom: 15px;
             color: #ff9f43;
         }
-
         .countdown-display {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
         }
-
         .time-box {
             background: rgba(0, 0, 0, 0.3);
             padding: 10px;
             border-radius: 6px;
         }
-
         .time-box span {
             display: block;
         }
@@ -86,7 +78,6 @@
             font-weight: bold;
             font-family: monospace;
         }
-
         .label {
             font-size: 0.75rem;
             text-transform: uppercase;
@@ -96,13 +87,9 @@
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <!-- Digital Clock Section -->
+    <div class="container">    
         <h1>Digital Clock</h1>
         <div class="clock-display" id="clock">00:00:00</div>
-
-        <!-- Countdown Timer Section -->
         <div class="countdown-title">Countdown to New Year 🎆</div>
         <div class="countdown-display">
             <div class="time-box">
@@ -123,15 +110,11 @@
             </div>
         </div>
     </div>
-
-    <!-- JavaScript Logic -->
+    
     <script>
-        // Helper function to pad single digits with a leading zero (e.g., 9 becomes 09)
         function formatTime(time) {
             return time < 10 ? `0${time}` : time;
         }
-
-        // 1. Digital Clock Function
         function updateClock() {
             const now = new Date();
             const hours = formatTime(now.getHours());
@@ -140,33 +123,24 @@
 
             document.getElementById('clock').innerText = `${hours}:${minutes}:${seconds}`;
         }
-
-        // 2. Countdown Timer Function
         function updateCountdown() {
             const currentYear = new Date().getFullYear();
             const nextNewYear = new Date(`January 1, ${currentYear + 1} 00:00:00`);
             const now = new Date();
             
-            const timeDifference = nextNewYear - now; // Difference in milliseconds
-
-            // Mathematical conversions from milliseconds
+            const timeDifference = nextNewYear - now; 
             const d = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
             const h = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-            // Update DOM with padded values
             document.getElementById('days').innerText = formatTime(d);
             document.getElementById('hours').innerText = formatTime(h);
             document.getElementById('minutes').innerText = formatTime(m);
             document.getElementById('seconds').innerText = formatTime(s);
         }
-
-        // Run both updates immediately when page loads
         updateClock();
         updateCountdown();
-
-        // Use setInterval to refresh the clock and countdown every 1 second (1000ms)
         setInterval(() => {
             updateClock();
             updateCountdown();
