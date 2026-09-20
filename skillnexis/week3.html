@@ -177,7 +177,7 @@
     // OpenWeatherMap API Configuration
     // Replace 'YOUR_API_KEY_HERE' with your actual key from OpenWeatherMap
     const API_KEY = 'YOUR_API_KEY_HERE';
-    const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
+    const BASE_URL = 'https://openweathermap.org/api';
 
     // DOM Element References
     const cityInput = document.getElementById('cityInput');
@@ -247,7 +247,7 @@
       temperatureEl.textContent = `${temp}°C`;
       weatherConditionEl.textContent = condition;
       humidityEl.textContent = `${humidity}%`;
-      weatherIconEl.src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+      weatherIconEl.src = `https://openweathermap.org/api`;
       weatherIconEl.alt = condition;
 
       weatherDisplay.classList.remove('hidden');
