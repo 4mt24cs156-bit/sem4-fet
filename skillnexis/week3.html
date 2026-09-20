@@ -174,10 +174,9 @@
   </div>
 
   <script>
-    // OpenWeatherMap API Configuration
-    // Replace 'YOUR_API_KEY_HERE' with your actual key from OpenWeatherMap
-    const API_KEY = 'YOUR_API_KEY_HERE';
-    const BASE_URL = 'https://openweathermap.org/api';
+    // OpenWeatherMap API Key updated
+    const API_KEY = '6c6c7c48a75e137426581749672e81db';
+    const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
     // DOM Element References
     const cityInput = document.getElementById('cityInput');
@@ -219,7 +218,7 @@
           if (response.status === 404) {
             throw new Error('City not found. Please check spelling.');
           } else if (response.status === 401) {
-            throw new Error('Invalid API Key. Please add a valid key.');
+            throw new Error('Invalid API Key or key is still activating. Try again shortly.');
           } else {
             throw new Error('Failed to fetch weather data. Try again later.');
           }
@@ -247,7 +246,7 @@
       temperatureEl.textContent = `${temp}°C`;
       weatherConditionEl.textContent = condition;
       humidityEl.textContent = `${humidity}%`;
-      weatherIconEl.src = `https://openweathermap.org/api`;
+      weatherIconEl.src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
       weatherIconEl.alt = condition;
 
       weatherDisplay.classList.remove('hidden');
