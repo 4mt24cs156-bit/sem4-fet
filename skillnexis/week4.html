@@ -1,185 +1,559 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Amazon - Capstone Project</title>
-    <!-- Tailwind CSS CDN for styling -->
-    <script src="https://tailwindcss.com"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Amazon</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f3f3f3;
+}
+
+/* NAVBAR */
+nav {
+    background: #131921;
+    color: white;
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: #ff9900;
+}
+
+.search {
+    flex: 1;
+    max-width: 600px;
+    display: flex;
+}
+
+.search input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    outline: none;
+}
+
+.search button {
+    padding: 12px 20px;
+    border: none;
+    background: #febd69;
+    cursor: pointer;
+}
+
+.cart {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* PRODUCTS */
+.container {
+    width: 90%;
+    margin: 30px auto;
+}
+
+.container h2 {
+    margin-bottom: 20px;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #ccc;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+}
+
+.card h3 {
+    margin: 10px 0;
+}
+
+.price {
+    color: #b12704;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.rating {
+    color: #f5a623;
+    margin: 8px 0;
+}
+
+button {
+    cursor: pointer;
+}
+
+.card button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 5px;
+}
+
+.details {
+    background: #ddd;
+}
+
+.add {
+    background: #ffd814;
+}
+
+/* POPUP */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    padding: 25px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.modal-content img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+}
+
+.modal-content h2 {
+    margin: 15px 0;
+}
+
+.modal-content button {
+    background: #ffd814;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+/* CART */
+.cart-page {
+    display: none;
+    width: 90%;
+    margin: 30px auto;
+}
+
+.cart-item {
+    background: white;
+    margin: 10px 0;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.remove {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.total {
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* MOBILE */
+@media(max-width:600px) {
+    nav {
+        flex-wrap: wrap;
+    }
+
+    .search {
+        order: 3;
+        width: 100%;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+}
+</style>
 </head>
-<body class="bg-gray-100 font-sans min-h-screen flex flex-col">
 
-    <!-- UNIVERSAL NAVIGATION BAR -->
-    <nav class="bg-gray-900 text-white sticky top-0 z-40 shadow-md">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-            <button onclick="switchView('shop')" class="text-2xl font-bold tracking-tight text-amber-500 hover:opacity-90">
-                mini<span class="text-white">amazon</span>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">Mini Amazon</div>
+
+    <div class="search">
+        <input type="text" id="searchBox" placeholder="Search products...">
+        <button onclick="searchProducts()">🔍</button>
+    </div>
+
+    <div class="cart" onclick="showCart()">
+        🛒 Cart (<span id="cartCount">0</span>)
+    </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div class="container" id="home">
+    <h2>Featured Products</h2>
+    <div class="products" id="productList"></div>
+</div>
+
+<!-- CART PAGE -->
+<div class="cart-page" id="cartPage">
+    <h2>Shopping Cart</h2>
+    <div id="cartItems"></div>
+    <div class="total">
+        Total: ₹<span id="totalPrice">0</span>
+    </div>
+
+    <button onclick="showHome()" 
+            style="margin-top:15px;padding:10px 20px;background:#ffd814;border:0;border-radius:5px;">
+        Continue Shopping
+    </button>
+</div>
+
+<!-- PRODUCT DETAILS POPUP -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">×</span>
+
+        <img id="modalImage">
+
+        <h2 id="modalName"></h2>
+
+        <p id="modalDescription"></p>
+
+        <h3 class="price">₹<span id="modalPrice"></span></h3>
+
+        <div class="rating">⭐⭐⭐⭐⭐</div>
+
+        <button onclick="addModalProduct()">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<script>
+
+const products = [
+    {
+        id: 1,
+        name: "Wireless Headphones",
+        price: 1499,
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
+        description: "High quality wireless headphones with comfortable ear cushions and clear sound."
+    },
+    {
+        id: 2,
+        name: "Smart Watch",
+        price: 2499,
+        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
+        description: "Modern smart watch with fitness tracking and notification support."
+    },
+    {
+        id: 3,
+        name: "Laptop",
+        price: 59999,
+        image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853",
+        description: "Powerful laptop suitable for students, programming and everyday work."
+    },
+    {
+        id: 4,
+        name: "Smartphone",
+        price: 24999,
+        image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+        description: "Latest smartphone with a high quality camera and powerful processor."
+    },
+    {
+        id: 5,
+        name: "Gaming Mouse",
+        price: 999,
+        image: "https://images.unsplash.com/photo-1527814050087-3793815479db",
+        description: "Ergonomic gaming mouse with accurate tracking and RGB lighting."
+    },
+    {
+        id: 6,
+        name: "Bluetooth Speaker",
+        price: 1299,
+        image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1",
+        description: "Portable Bluetooth speaker with powerful audio and long battery life."
+    }
+];
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let selectedProduct = null;
+
+
+/* DISPLAY PRODUCTS */
+
+function displayProducts(list = products) {
+
+    const productList = document.getElementById("productList");
+
+    productList.innerHTML = "";
+
+    list.forEach(product => {
+
+        productList.innerHTML += `
+        <div class="card">
+
+            <img src="${product.image}" alt="${product.name}">
+
+            <h3>${product.name}</h3>
+
+            <div class="rating">⭐⭐⭐⭐⭐</div>
+
+            <p class="price">₹${product.price}</p>
+
+            <button class="details"
+                onclick="showDetails(${product.id})">
+                View Details
             </button>
-            <div class="flex items-center space-x-4">
-                <button id="nav-back-shop" onclick="switchView('shop')" class="text-gray-300 hover:text-white transition text-sm font-medium hidden">
-                    ← Back to Shopping
-                </button>
-                <button id="cart-toggle-btn" onclick="switchView('cart')" class="relative flex items-center bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg transition">
-                    <span>🛒 View Cart</span>
-                    <span id="cart-badge" class="ml-2 bg-amber-500 text-gray-950 text-xs font-bold px-2 py-0.5 rounded-full">0</span>
-                </button>
-            </div>
+
+            <button class="add"
+                onclick="addToCart(${product.id})">
+                Add to Cart
+            </button>
+
         </div>
-    </nav>
+        `;
+    });
+}
 
-    <!-- VIEW 1: HOME PAGE STOREFRONT -->
-    <div id="shop-view" class="flex flex-col flex-grow">
-        <!-- Hero Banner -->
-        <header class="bg-gradient-to-r from-gray-800 to-gray-700 text-white text-center py-12 px-4 shadow-inner">
-            <h1 class="text-4xl font-extrabold mb-2">Exclusive Week 4 Tech Deals</h1>
-            <p class="text-gray-300 max-w-xl mx-auto">Explore premium gadgets featuring local storage integration and fully responsive grid design layouts.</p>
-        </header>
 
-        <!-- Main Product Catalog Grid -->
-        <main class="max-w-7xl mx-auto px-4 py-10 flex-grow w-full">
-            <h2 class="text-3xl font-bold text-gray-800 mb-6">Trending Products</h2>
-            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Dynamic product cards inject here -->
+/* SHOW PRODUCT DETAILS */
+
+function showDetails(id) {
+
+    selectedProduct = products.find(p => p.id === id);
+
+    document.getElementById("modalImage").src =
+        selectedProduct.image;
+
+    document.getElementById("modalName").innerText =
+        selectedProduct.name;
+
+    document.getElementById("modalDescription").innerText =
+        selectedProduct.description;
+
+    document.getElementById("modalPrice").innerText =
+        selectedProduct.price;
+
+    document.getElementById("modal").style.display = "flex";
+}
+
+
+/* CLOSE POPUP */
+
+function closeModal() {
+    document.getElementById("modal").style.display = "none";
+}
+
+
+/* ADD TO CART */
+
+function addToCart(id) {
+
+    const product = products.find(p => p.id === id);
+
+    cart.push(product);
+
+    saveCart();
+
+    alert(product.name + " added to cart!");
+}
+
+
+/* ADD FROM POPUP */
+
+function addModalProduct() {
+
+    if(selectedProduct) {
+        addToCart(selectedProduct.id);
+        closeModal();
+    }
+}
+
+
+/* SAVE CART */
+
+function saveCart() {
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    updateCartCount();
+}
+
+
+/* UPDATE CART COUNT */
+
+function updateCartCount() {
+
+    document.getElementById("cartCount").innerText =
+        cart.length;
+}
+
+
+/* SHOW CART */
+
+function showCart() {
+
+    document.getElementById("home").style.display = "none";
+
+    document.getElementById("cartPage").style.display = "block";
+
+    displayCart();
+}
+
+
+/* SHOW HOME */
+
+function showHome() {
+
+    document.getElementById("cartPage").style.display = "none";
+
+    document.getElementById("home").style.display = "block";
+}
+
+
+/* DISPLAY CART */
+
+function displayCart() {
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+    if(cart.length === 0) {
+
+        cartItems.innerHTML =
+            "<p>Your cart is empty.</p>";
+
+    }
+
+    cart.forEach((product, index) => {
+
+        total += product.price;
+
+        cartItems.innerHTML += `
+        <div class="cart-item">
+
+            <div>
+                <h3>${product.name}</h3>
+                <p>₹${product.price}</p>
             </div>
-        </main>
-    </div>
 
-    <!-- VIEW 2: DEDICATED SHOPPING CART PAGE -->
-    <div id="cart-view" class="flex-grow w-full hidden">
-        <main class="max-w-5xl mx-auto px-4 py-10 w-full">
-            <h2 class="text-3xl font-bold text-gray-800 mb-8">Shopping Cart Manifest</h2>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Left Side: Dynamic Items List -->
-                <div class="lg:col-span-2 space-y-4" id="cart-list-wrapper">
-                    <!-- Dynamic cart rows inject here -->
-                </div>
+            <button class="remove"
+                onclick="removeFromCart(${index})">
+                Remove
+            </button>
 
-                <!-- Right Side: Calculation Receipt Card -->
-                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 h-fit space-y-4">
-                    <h3 class="text-lg font-bold text-gray-800 border-b pb-2">Order Summary</h3>
-                    <div class="flex justify-between text-sm text-gray-600">
-                        <span>Items Total Count:</span>
-                        <span id="summary-qty">0</span>
-                    </div>
-                    <div class="flex justify-between text-xl font-extrabold text-gray-900 border-t pt-4">
-                        <span>Grand Total:</span>
-                        <span id="summary-total">$0.00</span>
-                    </div>
-                    <button onclick="alert('Order placed successfully! State saved to memory.')" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-3 rounded-lg shadow-md transition tracking-wide">
-                        Proceed to Final Checkout
-                    </button>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- GLOBAL PRODUCT DETAILS POPUP MODAL -->
-    <div id="product-modal" class="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 hidden">
-        <div class="bg-white rounded-xl shadow-2xl max-w-lg w-full p-6 relative max-h-[90vh] overflow-y-auto">
-            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold">&times;</button>
-            <div id="modal-content" class="space-y-4">
-                <!-- Dynamic modal details inject here -->
-            </div>
         </div>
-    </div>
+        `;
+    });
 
-    <!-- UNIVERSAL FOOTER -->
-    <footer class="bg-gray-900 text-gray-400 text-center py-4 text-sm mt-auto">
-        <p>&copy; 2026 Mini Amazon Storefront. Front-End Integration Complete.</p>
-    </footer>
+    document.getElementById("totalPrice").innerText =
+        total;
+}
 
-    <!-- COMBINED JAVASCRIPT APP LOGIC -->
-    <script>
-        // 1. Static Product Database Catalog
-        const PRODUCTS = [
-            { 
-                id: 1, 
-                name: "Premium Wireless Headphones", 
-                price: 89.99, 
-                image: "https://unsplash.com", 
-                desc: "Experience pure audio bliss with active noise cancellation, deep bass output, and ultra-comfortable memory foam earcups for extended listening sessions." 
-            },
-            { 
-                id: 2, 
-                name: "Smart Fitness Watch", 
-                price: 129.50, 
-                image: "https://unsplash.com", 
-                desc: "Track custom workouts, monitor blood oxygen saturation, count daily structural steps, and manage cross-platform phone notifications seamlessly." 
-            },
-            { 
-                id: 3, 
-                name: "Mechanical Gaming Keyboard", 
-                price: 74.99, 
-                image: "https://unsplash.com", 
-                desc: "Tactile clicky switches designed for rapid input precision, custom robust dynamic RGB backlit setups, and high-performance ergonomic framing." 
-            },
-            { 
-                id: 4, 
-                name: "Ergonomic Wireless Mouse", 
-                price: 39.99, 
-                image: "https://unsplash.com", 
-                desc: "Contoured surface profile engineered perfectly for vertical palm stability, variable precision tracking adjustments, and extended battery lifetimes." 
-            }
-        ];
 
-        // 2. Global State Variable (Loads from Local Storage or starts empty)
-        let cart = JSON.parse(localStorage.getItem('mini_amazon_cart')) || [];
+/* REMOVE PRODUCT */
 
-        // 3. Initialization Execution Hook
-        document.addEventListener('DOMContentLoaded', () => {
-            renderProductGrid();
-            updateCartState();
+function removeFromCart(index) {
 
-            // Background mask modal click listener
-            const modal = document.getElementById('product-modal');
-            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-            document.getElementById('close-modal-btn').addEventListener('click', closeModal);
-        });
+    cart.splice(index, 1);
 
-        // 4. View Switcher Routing Logic (SPA Layout Control)
-        function switchView(viewName) {
-            const shopView = document.getElementById('shop-view');
-            const cartView = document.getElementById('cart-view');
-            const backBtn = document.getElementById('nav-back-shop');
+    saveCart();
 
-            if (viewName === 'shop') {
-                shopView.classList.remove('hidden');
-                cartView.classList.add('hidden');
-                backBtn.classList.add('hidden');
-            } else if (viewName === 'cart') {
-                shopView.classList.add('hidden');
-                cartView.classList.remove('hidden');
-                backBtn.classList.remove('hidden');
-                buildCartView(); // Always re-render cart lists up to date
-            }
-        }
+    displayCart();
+}
 
-        // 5. Storefront Renderer
-        function renderProductGrid() {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = PRODUCTS.map(product => `
-                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 flex flex-col group hover:shadow-lg transition">
-                    <div class="h-48 bg-gray-100 overflow-hidden">
-                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-                    </div>
-                    <div class="p-4 flex flex-col flex-grow">
-                        <h3 class="font-bold text-gray-800 text-base mb-1 truncate">${product.name}</h3>
-                        <p class="text-amber-600 font-extrabold text-lg mb-4">$${product.price.toFixed(2)}</p>
-                        <div class="grid grid-cols-2 gap-2 mt-auto">
-                            <button onclick="openModal(${product.id})" class="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 rounded-lg transition">Details</button>
-                            <button onclick="addToCart(${product.id})" class="text-xs bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2 rounded-lg transition">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
 
-        // 6. Popup Modal Controllers
-        function openModal(id) {
-            const product = PRODUCTS.find(p => p.id === id);
-            if (!product) return;
+/* SEARCH */
 
-            const content = document.getElementById('modal-content');
-            content.innerHTML = `
-                <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover rounded-lg">
+function searchProducts() {
+
+    const search =
+        document.getElementById("searchBox")
+        .value.toLowerCase();
+
+    const filtered =
+        products.filter(product =>
+            product.name.toLowerCase()
+            .includes(search)
+        );
+
+    displayProducts(filtered);
+}
+
+
+/* INITIAL LOAD */
+
+displayProducts();
+
+updateCartCount();
+
+</script>
+
+</body>
+</html>
