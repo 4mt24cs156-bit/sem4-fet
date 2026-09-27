@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Amazon - Capstone Project</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen flex flex-col">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="bg-gray-900 text-white sticky top-0 z-40 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-tight text-amber-500">mini<span class="text-white">amazon</span></a>
+            <button id="cart-toggle-btn" class="relative flex items-center bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg transition">
+                <span class="mr-2">🛒 Cart</span>
+                <span id="cart-badge" class="bg-amber-500 text-gray-950 text-xs font-bold px-2 py-0.5 rounded-full">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO BANNER -->
+    <header class="bg-gradient-to-r from-gray-800 to-gray-700 text-white text-center py-12 px-4 shadow-inner">
+        <h1 class="text-4xl font-extrabold mb-2">Exclusive Week 4 Tech Deals</h1>
+        <p class="text-gray-300 max-w-xl mx-auto">Explore premium gadgets featuring local storage integration and fully responsive grid design layouts.</p>
+    </header>
+
+    <!-- MAIN PRODUCT CATALOG GRID -->
+    <main class="max-w-7xl mx-auto px-4 py-10 flex-grow w-full">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Trending Products</h2>
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Dynamic product cards will inject here -->
+        </div>
+    </main>
+
+    <!-- PRODUCT DETAILS MODAL (POPUP) -->
+    <div id="product-modal" class="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 hidden transition-opacity">
+        <div class="bg-white rounded-xl shadow-2xl max-w-lg w-full overflow-hidden transform scale-95 transition-transform p-6 relative">
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold">&times;</button>
+            <div id="modal-content" class="space-y-4">
+                <!-- Dynamic modal details will inject here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE-OUT CART PANEL -->
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-4 bg-gray-900 text-white flex justify-between items-center">
+            <h3 class="text-xl font-bold">Your Shopping Cart</h3>
+            <button id="close-cart-btn" class="text-white hover:text-amber-500 text-xl font-bold">✕ Close</button>
+        </div>
+        <!-- Scrollable Cart Items Container -->
+        <div id="cart-items-container" class="p-4 overflow-y-auto flex-grow space-y-4">
+            <!-- Dynamic cart rows will inject here -->
+        </div>
+        <!-- Cart Total Summary Footnote -->
+        <div class="p-4 bg-gray-50 border-t border-gray-200 space-y-3">
+            <div class="flex justify-between items-center text-lg font-bold text-gray-800">
+                <span>Grand Total:</span>
+                <span id="cart-grand-total">$0.00</span>
+            </div>
+            <button onclick="alert('Order placed successfully! State saved to memory.')" class="w-full bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-3 rounded-lg text-center transition">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400 text-center py-6 text-sm mt-auto">
+        <p>&copy; 2026 Mini Amazon Capstone Project. Front-End Core Integration Completed.</p>
+    </footer>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // 1. Static Product Catalog Array
+        const PRODUCTS = [
+            { id: 1, name: "Premium Wireless Headphones", price: 89.99, image: "https://unsplash.com", desc: "Experience pure audio bliss with active noise cancellation and ultra-comfortable memory foam earcups." },
+            { id: 2, name: "Smart Fitness Watch", price: 129.50, image: "https://unsplash.com", desc: "Track workouts, count daily steps, analyze heart rate metrics, and manage text notifications directly from your wrist." },
+            { id: 3, name: "Mechanical Gaming Keyboard", price: 74.99, image: "https://unsplash.com", desc: "Tactile clicky blue switches, robust dynamic RGB backlit setups, and high-performance anti-ghosting layouts." },
+            { id: 4, name: "Ergonomic Wireless Mouse", price: 39.99, image: "https://unsplash.com", desc: "Contoured layout designed for wrist comfort with high-precision tracking switches and adjustable DPI rates." }
+        ];
+
+        // 2. State Variable (Loads from Local Storage or starts empty)
+        let cart = JSON.parse(localStorage.getItem('mini_amazon_cart')) || [];
+
+        // 3. DOM Cache Selectors
+        const productGrid = document.getElementById('product-grid');
+        const cartBadge = document.getElementById('cart-badge');
+        const productModal = document.getElementById('product-modal');
+        const modalContent = document.getElementById('modal-content');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const cartDrawer = document.getElementById('cart-drawer');
+        const cartToggleBtn = document.getElementById('cart-toggle-btn');
+        const closeCartBtn = document.getElementById('close-cart-btn');
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const cartGrandTotal = document.getElementById('cart-grand-total');
+
+        // 4. Initialization Loop
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProductGrid();
+            updateCartUI();
+        });
+
+        // 5. Render Products to UI Grid
+        function renderProductGrid() {
+            productGrid.innerHTML = PRODUCTS.map(product => `
+                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 flex flex-col group hover:shadow-lg transition">
+                    <div class="h-48 overflow-hidden bg-gray-100">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-4 flex flex-col flex-grow">
+                        <h3 class="font-bold text-gray-800 text-base mb-1 truncate">${product.name}</h3>
+                        <p class="text-amber-600 font-extrabold text-lg mb-3">$${product.price.toFixed(2)}</p>
+                        <div class="grid grid-cols-2 gap-2 mt-auto">
+                            <button onclick="openModal(${product.id})" class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-3 rounded-lg transition">Details</button>
+                            <button onclick="addToCart(${product.id})" class="text-sm bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-2 px-3 rounded-lg transition">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 6. Modal Functions (Popups)
+        function openModal(id) {
+            const product = PRODUCTS.find(p => p.id === id);
+            if (!product) return;
+
+            modalContent.innerHTML = `
+                <div class="h-64 rounded-lg overflow-hidden bg-gray-100">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900">${product.name}</h3>
+                <p class="text-xl font-black text-amber-600">$${product.price.toFixed(2)}</p>
+                <p class="text-gray-600 text-sm leading-relaxed">${product.desc}</p>
+                <button onclick="addToCart(${product.id}); closeModal();" class="w-full mt-4 bg-amber-500 hover:bg-amber-600 text-gray-950 font-bold py-3 rounded-lg transition">
+                    ⚡ Instant Add To Cart
+                </button>
+            `;
+            productModal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            productModal.classList.add('hidden');
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+        productModal.addEventListener('click', (e) => { if (e.target === productModal) closeModal(); });
+
+        // 7. Shopping Cart Logic (State Management & CRUD)
+        function addToCart(productId) {
+            const targetItem = cart.find(item => item.id === productId);
+
+            if (targetItem) {
+                targetItem.quantity += 1; // Update quantity logic
+            } else {
+                cart.push({ id: productId, quantity: 1 }); // Create item logic
+            }
+
+            saveCartAndRefresh();
+            openCartDrawer();
+        }
+
+        function updateQuantity(productId, delta) {
+            const targetItem = cart.find(item => item.id === productId);
+            if (!targetItem) return;
+
+            targetItem.quantity += delta;
+
+            if (targetItem.quantity <= 0) {
+                cart = cart.filter(item => item.id !== productId); // Delete item logic
+            }
+
+            saveCartAndRefresh();
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId); // Delete item logic
